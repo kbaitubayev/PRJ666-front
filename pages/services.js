@@ -16,7 +16,7 @@ export default function Services() {
           />
         </Col>
         <Col className={`${styles["service-description"]}`}>
-          <h2>Deluxe Package</h2>
+          <h2>Deluxe Bath Package</h2>
           <ul>
             <li>Shampoo</li>
             <li>Conditioner</li>
@@ -37,7 +37,7 @@ export default function Services() {
           />
         </Col>
         <Col className={`${styles["service-description"]}`}>
-          <h2>Deluxe Package</h2>
+          <h2>Full Package</h2>
           <ul>
             <li>Shampoo</li>
             <li>Conditioner</li>
@@ -45,6 +45,7 @@ export default function Services() {
             <li>Brush</li>
             <li>Ear Cleaning</li>
             <li>Nail Trim</li>
+            <li>Hair clipping</li>
           </ul>
         </Col>
       </Row>
@@ -58,14 +59,12 @@ export default function Services() {
           />
         </Col>
         <Col className={`${styles["service-description"]}`}>
-          <h2>Deluxe Package</h2>
+          <h2>Shedless Treatment</h2>
           <ul>
-            <li>Shampoo</li>
-            <li>Conditioner</li>
-            <li>Blow Dry</li>
-            <li>Brush</li>
-            <li>Ear Cleaning</li>
-            <li>Nail Trim</li>
+            <li>Full Package with the Shedless Treatment</li>
+            <li>Bath with de-shedding solution</li>
+            <li>Deep brushing to extract loose dead hair</li>
+
           </ul>
         </Col>
       </Row>

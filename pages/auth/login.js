@@ -4,6 +4,11 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import api from '../../services/api';
 import UserDisplay from '../../components/UserDisplay';
+import Head from 'next/head';
+import Link from 'next/link';
+import { Form, Button } from 'react-bootstrap';
+import styles from '../../styles/Login.module.css';
+
 //import api from '../services/api';
 
 const Login = () => {
@@ -42,22 +47,34 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {/* Form fields go here, e.g., email, password, etc. */}
-        <input {...register('email', { required: 'Email is required' })} />
-        <input type="password" {...register('password', { required: 'Password is required' })} />
+    <div className={styles['login-container']}>
+        <Head>
+          <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet" />
+        </Head>
+        <h1 style={{ fontFamily: 'Permanent Marker, cursive', fontWeight: 'bold', fontSize: '4em', textAlign: "center", margin: "20px 0" }}>
+          LOG IN
+        </h1>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Control type="email" placeholder="Enter email" className={styles['form-control']} />
+          </Form.Group>
 
-        <button type="submit" disabled={isLoading}>Login</button>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Control type="password" placeholder="Password" className={styles['form-control']} />
+          </Form.Group>
 
-        {/* Display login error, if any */}
-        {errors.apiError && <p>{errors.apiError.message}</p>}
-
-        {/* Display user email if available */}
-        <UserDisplay userEmail={userEmail} />
-      </form>
-    </div>
+          <div className={styles['button-container']}>
+            <Button variant="primary" type="submit" className={styles['button']}>
+              LOGIN
+            </Button>
+          </div>
+          <p className={styles['signup-text']}>Not a member? &nbsp;
+            <Link href="/auth/register" passHref legacyBehavior>
+              <a>Sign up</a>
+            </Link>
+          </p>
+        </Form>
+      </div>
   );
 };
 
