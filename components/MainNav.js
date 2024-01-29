@@ -25,9 +25,10 @@ export default function MainNav() {
                   BOOKING
                 </Nav.Link>
               </Link>
-              <Link href="/login" passHref legacyBehavior>
+              <Link href="/auth/login" passHref legacyBehavior>
                 <Nav.Link>Login</Nav.Link>
               </Link>
+              
             </Nav>
           </Navbar.Collapse>
         </Container>
