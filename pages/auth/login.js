@@ -32,6 +32,9 @@ const Login = () => {
       // Store the token in a secure manner (localStorage, sessionStorage)
       localStorage.setItem('authToken', token);
 
+          // Log a message for successful login
+    console.log('Login successful:', user.email);
+
       // Redirect to home page after successful login
       router.push('/services'); // Redirect to the desired route
     } catch (error) {
