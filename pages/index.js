@@ -41,9 +41,37 @@ const Home = () => {
               layout="responsive"
             />
             <Card.Body>
-              <Card.Title className={styles["card-title"]}>
-                Service 1
-              </Card.Title>
+              <Card.Title className={styles["card-title"]}>Washing</Card.Title>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col sm={4}>
+          <Card
+            className={`${styles["service-card"]} ${styles["card-margin"]}`}
+          >
+            <Image
+              src={image1}
+              alt="Gallery image"
+              objectFit="cover"
+              layout="responsive"
+            />
+            <Card.Body>
+              <Card.Title className={styles["card-title"]}>Washing</Card.Title>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col sm={4}>
+          <Card
+            className={`${styles["service-card"]} ${styles["card-margin"]}`}
+          >
+            <Image
+              src={image1}
+              alt="Gallery image"
+              objectFit="cover"
+              layout="responsive"
+            />
+            <Card.Body>
+              <Card.Title className={styles["card-title"]}>Washing</Card.Title>
             </Card.Body>
           </Card>
         </Col>
