@@ -3,8 +3,13 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Link from "next/link";
+import { Button } from "react-bootstrap";
+import { useRouter } from "next/router";
 
 export default function MainNav() {
+  const router = useRouter();
+  
+
   return (
     <>
       <Navbar
@@ -18,12 +23,13 @@ export default function MainNav() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               <Link href="/booking" passHref legacyBehavior>
-                <Nav.Link
-                  className="btn btn-primary"
-                  style={{ backgroundColor: "blue", fontWeight: "bold" }}
+                <Button
+                  type="button"
+                  className="btn btn-danger"
+                  style={{fontWeight: "bold", letterSpacing: "2px"}}
                 >
-                  BOOKING
-                </Nav.Link>
+                  BOOK NOW
+                </Button>
               </Link>
               <Link href="/auth/login" passHref legacyBehavior>
                 <Nav.Link>Login</Nav.Link>
@@ -39,18 +45,26 @@ export default function MainNav() {
         <Container>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto">
-              <Nav.Link href="/" style={{ marginRight: "10px" }}>
-                Home
-              </Nav.Link>
-              <Nav.Link href="/about" style={{ marginRight: "10px" }}>
-                About Us
-              </Nav.Link>
-              <Nav.Link href="/services" style={{ marginRight: "10px" }}>
-                Services
-              </Nav.Link>
-              <Nav.Link href="/contact" style={{ marginRight: "10px" }}>
-                Contact
-              </Nav.Link>
+              <Link href="/" passHref legacyBehavior>
+                <Nav.Link style={{ marginRight: "10px", fontWeight:"bold"}} active={router.pathname === "/"} >
+                  Home
+                </Nav.Link> 
+              </Link>
+              <Link href="/about" passHref legacyBehavior>
+                <Nav.Link style={{ marginRight: "10px", fontWeight:"bold"}} active={router.pathname === "/about"}>
+                  About Us
+                </Nav.Link>
+              </Link>
+              <Link href="/services" passHref legacyBehavior>
+                <Nav.Link style={{ marginRight: "10px", fontWeight:"bold"}} active={router.pathname === "/services"}>
+                  Services
+                </Nav.Link>
+              </Link>
+              <Link href="/contact" passHref legacyBehavior>
+                <Nav.Link href="/contact" style={{ marginRight: "10px" , fontWeight:"bold"}} active={router.pathname === "/contact"}>
+                  Contact
+                </Nav.Link>
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

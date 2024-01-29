@@ -4,25 +4,34 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import api from '../../services/api';
 import UserDisplay from '../../components/UserDisplay';
+//import api from '../services/api';
 
 const Login = () => {
   const { register, handleSubmit, setError, formState: { errors } } = useForm();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [userEmail, setUserEmail] = useState(null);
+  const [userEmail, setUserEmail] = useState(null); // New state for user email
 
   const onSubmit = async (data) => {
     setIsLoading(true);
 
     try {
+      // Make a POST request to your login endpoint
       const response = await api.post('/auth/login', data);
+
+      // Assuming the response includes a token and user details
       const { token, user } = response.data;
 
+      // Store the token in a secure manner (localStorage, sessionStorage)
       localStorage.setItem('authToken', token);
+
+      // Update state with user email upon successful login
       setUserEmail(user.email);
 
-      router.push('/services');
+      // Redirect to home page after successful login
+      router.push('/services'); // Redirect to the desired route
     } catch (error) {
+      // Handle login error
       setError('apiError', {
         type: 'manual',
         message: 'Login failed. Please check your credentials and try again.',
@@ -30,14 +39,6 @@ const Login = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleLogout = () => {
-    // Implement logout logic here
-    localStorage.removeItem('authToken');
-    setUserEmail(null);
-    // Redirect to the login page or any other desired location after logout
-    router.push('/login');
   };
 
   return (
@@ -55,9 +56,6 @@ const Login = () => {
 
         {/* Display user email if available */}
         <UserDisplay userEmail={userEmail} />
-
-        {/* Add Logout button */}
-        {userEmail && <button onClick={handleLogout}>Logout</button>}
       </form>
     </div>
   );
