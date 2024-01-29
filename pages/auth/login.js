@@ -9,13 +9,15 @@ import Link from 'next/link';
 import { Form, Button } from 'react-bootstrap';
 import styles from '../../styles/Login.module.css';
 
-//import api from '../services/api';
-
 const Login = () => {
-  const { register, handleSubmit, setError, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [userEmail, setUserEmail] = useState(null); // New state for user email
 
   const onSubmit = async (data) => {
     setIsLoading(true);
@@ -29,9 +31,6 @@ const Login = () => {
 
       // Store the token in a secure manner (localStorage, sessionStorage)
       localStorage.setItem('authToken', token);
-
-      // Update state with user email upon successful login
-      setUserEmail(user.email);
 
       // Redirect to home page after successful login
       router.push('/services'); // Redirect to the desired route
@@ -48,33 +47,57 @@ const Login = () => {
 
   return (
     <div className={styles['login-container']}>
-        <Head>
-          <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet" />
-        </Head>
-        <h1 style={{ fontFamily: 'Permanent Marker, cursive', fontWeight: 'bold', fontSize: '4em', textAlign: "center", margin: "20px 0" }}>
-          LOG IN
-        </h1>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Control type="email" placeholder="Enter email" className={styles['form-control']} />
-          </Form.Group>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+      <h1
+        style={{
+          fontFamily: 'Permanent Marker, cursive',
+          fontWeight: 'bold',
+          fontSize: '4em',
+          textAlign: 'center',
+          margin: '20px 0',
+        }}
+      >
+        LOG IN
+      </h1>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            className={styles['form-control']}
+            {...register('email', { required: 'Email is required' })}
+          />
+          {errors.email && <p className="error-message">{errors.email.message}</p>}
+        </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
-            <Form.Control type="password" placeholder="Password" className={styles['form-control']} />
-          </Form.Group>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            className={styles['form-control']}
+            {...register('password', { required: 'Password is required' })}
+          />
+          {errors.password && <p className="error-message">{errors.password.message}</p>}
+        </Form.Group>
 
-          <div className={styles['button-container']}>
-            <Button variant="primary" type="submit" className={styles['button']}>
-              LOGIN
-            </Button>
-          </div>
-          <p className={styles['signup-text']}>Not a member? &nbsp;
-            <Link href="/auth/register" passHref legacyBehavior>
-              <a>Sign up</a>
-            </Link>
-          </p>
-        </Form>
-      </div>
+        <div className={styles['button-container']}>
+          <Button variant="primary" type="submit" className={styles['button']}>
+            LOGIN
+          </Button>
+        </div>
+        <p className={styles['signup-text']}>
+          Not a member?{' '}
+          <Link href="/auth/register" passHref legacyBehavior>
+            <a>Sign up</a>
+          </Link>
+        </p>
+      </Form>
+    </div>
   );
 };
 
