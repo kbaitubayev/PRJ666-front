@@ -31,12 +31,13 @@ const Login = () => {
 
       // Store the token in a secure manner (localStorage, sessionStorage)
       localStorage.setItem('authToken', token);
+      localStorage.setItem('userLoggedIn', JSON.stringify(user));
 
-          // Log a message for successful login
-    console.log('Login successful:', user.email);
+      // Log a message for successful login
+      console.log('Login successful:', user.email);
 
       // Redirect to home page after successful login
-      router.push('/services'); // Redirect to the desired route
+      window.location.href = '/';
     } catch (error) {
       // Handle login error
       setError('apiError', {

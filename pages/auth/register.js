@@ -7,6 +7,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { Form, Button } from 'react-bootstrap';
 import styles from '../../styles/Login.module.css';
+import { toast } from 'react-toastify';
 
 
 const Register = () => {
@@ -23,6 +24,11 @@ const Register = () => {
 
       // Redirect to login page after successful registration
       router.push('/auth/login');
+      toast.success('Registration successful',
+        {
+          position: 'bottom-center',
+          autoClose: 500,
+        });
     } catch (error) {
       // Handle registration error
       setError('apiError', {
@@ -53,7 +59,7 @@ const Register = () => {
             {...register('password', { required: 'Password is required' })} />
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group controlId="formBasicConfirmPassword">
           <Form.Control type="password" placeholder="Confirmed Password" className={styles['form-control']}
             {...register('password', { required: 'Password is required' })} />
         </Form.Group>
