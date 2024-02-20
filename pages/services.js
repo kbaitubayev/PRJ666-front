@@ -33,10 +33,10 @@ const Services = () => {
                 {/* First row, left column (contains picture) */}
                 <div className="col-md-3">
                 <img
-    src={service.imageUrl}
-    alt={`${service.title} Image`}
-    style={{ maxWidth: "100px" }} // Set the desired maximum width
-    className="card-img-top"
+                  src={service.imageUrl}
+                  alt={`${service.title} Image`}
+                  style={{ maxWidth: "100px" }} // Set the desired maximum width
+                  className="card-img-top"
   />
                 </div>
                 {/* First row, right column (contains card title) */}
