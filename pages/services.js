@@ -32,28 +32,28 @@ const Services = () => {
               <div className="row g-0">
                 {/* First row, left column (contains picture) */}
                 <div className="col-md-3">
-                <img
-                  src={service.imageUrl}
-                  alt={`${service.title} Image`}
-                  style={{ maxWidth: "100px" }} // Set the desired maximum width
-                  className="card-img-top"
-  />
+                  <img
+                    src={service.imageUrl}
+                    alt={`${service.title} Image`}
+                    style={{ maxWidth: "100px" }} // Set the desired maximum width
+                    className="card-img-top"
+                  />
                 </div>
                 {/* First row, right column (contains card title) */}
                 <div className="col-md-9 d-flex align-items-center">
-  <div className="card-body">
-    <h5 className="card-title">{service.title}</h5>
-  </div>
-</div>
+                  <div className="card-body">
+                    <h5 className="card-title">{service.title}</h5>
+                  </div>
+                </div>
               </div>
               {/* Second row (contains text with description) */}
               <div className="row">
-  <div className="col-md-12">
-    <div className="card-body">
-      <p className="card-text" dangerouslySetInnerHTML={{ __html: service.text.replace(/\n/g, '<br/>') }}></p>
-    </div>
-  </div>
-</div>
+                <div className="col-md-12">
+                  <div className="card-body">
+                    <p className="card-text" dangerouslySetInnerHTML={{ __html: service.text.replace(/\n/g, '<br/>') }}></p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         ))}
