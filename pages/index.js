@@ -1,11 +1,18 @@
 // pages/index.js
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import api from '../services/api';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
 import styles from '../styles/Home.module.css'; // Import the CSS module
+
+const replaceNewlinesWithBr = (text) => {
+  return { __html: text.replace(/\n/g, '<br/>') };
+};
 
 const Home = () => {
   const [homeData, setHomeData] = useState(null);
@@ -40,6 +47,55 @@ const Home = () => {
     </div>
   </Col>
 </Row>
+
+ {/* Services cards */}
+ <Row className="mt-4">
+        {homeData && homeData.servicePics ? (
+          homeData.servicePics.map((service, index) => (
+            <Col key={index}>
+              <Link href="/services" passHref>
+                 <Card as="a" style={{ height: '100%' }}>
+                  <Card.Img variant="top" src={service.imageUrl} alt={`${service.title} Image`} />
+                  <Card.Body>
+              <Card.Title
+                className="text-center"
+                dangerouslySetInnerHTML={replaceNewlinesWithBr(service.title)}
+              />
+            </Card.Body>
+                </Card>
+              </Link>
+            </Col>
+          ))
+        ) : (
+          <Col>
+            <p>Loading services...</p>
+          </Col>
+        )}
+      </Row>
+
+            {/* Our Gallery title */}
+            <Row className="mt-4">
+        <Col>
+          <h2 className="text-center">OUR GALLERY</h2>
+        </Col>
+      </Row>
+
+{/* Gallery section */}
+<Row className="mt-4">
+        {homeData && homeData.galleryPics ? (
+          homeData.galleryPics.map((galleryItem, index) => (
+            <Col key={index} sm={6} md={4}>
+  <Card style={{ height: '100%' }}>
+    <Card.Img variant="top" src={galleryItem.imageUrl} alt={`${galleryItem.title} Image`} />
+  </Card>
+</Col>
+          ))
+        ) : (
+          <Col>
+            <p>Loading gallery...</p>
+          </Col>
+        )}
+      </Row>
 
       {/* Other sections */}
       {/* Add additional sections, components, or content as needed */}

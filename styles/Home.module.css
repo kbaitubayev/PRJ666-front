@@ -103,3 +103,16 @@
     }
   }
   
+  /* styles/Home.module.css */
+.service-pic-container {
+    height: 200px; /* Set the desired fixed height */
+    overflow: hidden;
+  }
+  
+  .service-pic {
+    max-width: 100%; /* Set the maximum width */
+    height: auto; /* Let the height adjust automatically to maintain aspect ratio */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+  }
+  
+  
