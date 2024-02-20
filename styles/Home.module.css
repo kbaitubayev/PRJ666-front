@@ -84,3 +84,22 @@
     line-height: 26px;
     padding: 0 0 23px 1em;
 }
+/* styles.css or your preferred CSS file */
+
+.title {
+    color: red;
+    font-weight: bold;
+    animation: blink 1s infinite; /* Apply blinking animation */
+  }
+  
+  .message {
+    color: red;
+    font-weight: bold;
+  }
+  
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  
