@@ -76,6 +76,7 @@ const Profile = () => {
 
     return (
         <>
+            <h1 className='my-3'>Profile</h1>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group className="mb-3" controlId="formGridName">
                     <Form.Label>Name</Form.Label>

@@ -34,34 +34,34 @@ const Home = () => {
     <Container>
       {/* Discount banner */}
       <Row>
-      <Col className={`text-center ${styles.discountBanner}`} style={{ backgroundImage: `url('/carousel.jpg')` }}>
-    <div className="discount-banner">
-      {homeData ? (
-        <>
-          <h1 className={styles.title}>{homeData.title}</h1>
-              <p className={styles.message}>{homeData.message}</p>
-        </>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
-  </Col>
-</Row>
+        <Col className={`text-center ${styles.discountBanner}`} style={{ backgroundImage: `url('/carousel.jpg')` }}>
+          <div className="discount-banner">
+            {homeData ? (
+              <>
+                <h1 className={styles.title}>{homeData.title}</h1>
+                <p className={styles.message}>{homeData.message}</p>
+              </>
+            ) : (
+              <p>Loading...</p>
+            )}
+          </div>
+        </Col>
+      </Row>
 
- {/* Services cards */}
- <Row className="mt-4">
+      {/* Services cards */}
+      <Row className="mt-4">
         {homeData && homeData.servicePics ? (
           homeData.servicePics.map((service, index) => (
             <Col key={index}>
               <Link href="/services" passHref>
-                 <Card as="a" style={{ height: '100%' }}>
+                <Card as="a" style={{ height: '100%' }}>
                   <Card.Img variant="top" src={service.imageUrl} alt={`${service.title} Image`} />
                   <Card.Body>
-              <Card.Title
-                className="text-center"
-                dangerouslySetInnerHTML={replaceNewlinesWithBr(service.title)}
-              />
-            </Card.Body>
+                    <Card.Title
+                      className="text-center"
+                      dangerouslySetInnerHTML={replaceNewlinesWithBr(service.title)}
+                    />
+                  </Card.Body>
                 </Card>
               </Link>
             </Col>
@@ -73,22 +73,22 @@ const Home = () => {
         )}
       </Row>
 
-            {/* Our Gallery title */}
-            <Row className="mt-4">
+      {/* Our Gallery title */}
+      <Row className="mt-4">
         <Col>
           <h2 className="text-center">OUR GALLERY</h2>
         </Col>
       </Row>
 
-{/* Gallery section */}
-<Row className="mt-4">
+      {/* Gallery section */}
+      <Row className="mt-4">
         {homeData && homeData.galleryPics ? (
           homeData.galleryPics.map((galleryItem, index) => (
             <Col key={index} sm={6} md={4}>
-  <Card style={{ height: '100%' }}>
-    <Card.Img variant="top" src={galleryItem.imageUrl} alt={`${galleryItem.title} Image`} />
-  </Card>
-</Col>
+              <Card style={{ height: '100%' }}>
+                <Card.Img variant="top" src={galleryItem.imageUrl} alt={`${galleryItem.title} Image`} />
+              </Card>
+            </Col>
           ))
         ) : (
           <Col>

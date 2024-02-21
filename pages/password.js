@@ -17,6 +17,8 @@ const Password = () => {
   };
 
   return (
+    <>
+    <h1 className='my-3'>Change Password</h1>
     <Form onSubmit={handleSubmit(onSubmit)}>
       <div className="row">
         <div className="col-md-6">
@@ -56,6 +58,8 @@ const Password = () => {
         </div>
       </div>
     </Form>
+    </>
+
   );
 }
 

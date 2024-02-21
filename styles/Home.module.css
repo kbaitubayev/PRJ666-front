@@ -84,35 +84,39 @@
     line-height: 26px;
     padding: 0 0 23px 1em;
 }
+
 /* styles.css or your preferred CSS file */
 
 .title {
     color: red;
     font-weight: bold;
-    animation: blink 1s infinite; /* Apply blinking animation */
-  }
-  
-  .message {
+    animation: blink 1s infinite;
+    /* Apply blinking animation */
+}
+
+.message {
     color: red;
     font-weight: bold;
-  }
-  
-  @keyframes blink {
+}
+
+@keyframes blink {
     50% {
-      opacity: 0;
+        opacity: 0;
     }
-  }
-  
-  /* styles/Home.module.css */
+}
+
+/* styles/Home.module.css */
 .service-pic-container {
-    height: 200px; /* Set the desired fixed height */
+    height: 200px;
+    /* Set the desired fixed height */
     overflow: hidden;
-  }
-  
-  .service-pic {
-    max-width: 100%; /* Set the maximum width */
-    height: auto; /* Let the height adjust automatically to maintain aspect ratio */
-    object-fit: cover; /* Maintain aspect ratio and cover the container */
-  }
-  
-  
+}
+
+.service-pic {
+    max-width: 100%;
+    /* Set the maximum width */
+    height: auto;
+    /* Let the height adjust automatically to maintain aspect ratio */
+    object-fit: cover;
+    /* Maintain aspect ratio and cover the container */
+}
