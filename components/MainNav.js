@@ -1,3 +1,4 @@
+//MainNav.js
 import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -14,17 +15,54 @@ export default function MainNav() {
   const [isExpanded, setIsExpanded] = useState(false);
   const router = useRouter();
   const [token, setToken] = useState(null);
+  const [customer, setCustomer] = useState({
+    user: {
+      email: '',
+      password: ''
+    }
+  });
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     // This code will only run on the client-side
     setToken(getToken());
+    // Fetch user data from local storage
+    setUser(JSON.parse(localStorage.getItem('userLoggedIn')));
   }, []);
+
+  useEffect(() => {
+    // Fetch customer profile data from the server
+    const fetchCustomerProfile = async () => {
+      try {
+        const token = localStorage.getItem('authToken');
+        const response = await api.get('/customers/profile', {
+          headers: {
+            'x-auth-token': token
+          },
+          body: JSON.stringify(user)
+        });
+        // Update customer state with fetched data
+        setCustomer(response.data);
+        localStorage.setItem('userName', response.data.name);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    // Fetch customer profile when user state changes
+    if (user) {
+      fetchCustomerProfile();
+    }
+  }, [user]);
 
   function logout() {
     removeToken();
     window.location.href = '/';
   }
 
+    // Function to check if the user is an admin
+    const isAdmin = () => {
+      return user.email === 'admin@seneca.ca';
+    }
 
   return (
     <>
@@ -56,9 +94,11 @@ export default function MainNav() {
 
               {token &&
                 <Nav>
-                  <NavDropdown title={"Wellcome"} id="basic-nav-dropdown">
+                  <NavDropdown title={user.email} id="basic-nav-dropdown">
                     <Link href="/profile" passHref legacyBehavior><Nav.Link><NavDropdown.Item active={router.pathname === "/profile"} onClick={() => setIsExpanded(false)} href="#action/3.1">Profile</NavDropdown.Item></Nav.Link></Link>
                     <Link href="/password" passHref legacyBehavior><Nav.Link><NavDropdown.Item active={router.pathname === "/password"} onClick={() => setIsExpanded(false)} href="#action/3.1">Change Password</NavDropdown.Item></Nav.Link></Link>
+                    {isAdmin() && <Link href="/service-management" passHref legacyBehavior><Nav.Link><NavDropdown.Item active={router.pathname === "/service-management"} onClick={() => setIsExpanded(false)} href="#action/3.1">Service Management</NavDropdown.Item></Nav.Link></Link>}
+                    
                     <NavDropdown.Item onClick={() => { setIsExpanded(false); logout(); }}>Logout</NavDropdown.Item>
                   </NavDropdown>
                 </Nav>
