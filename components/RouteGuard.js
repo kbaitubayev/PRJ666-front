@@ -1,3 +1,4 @@
+//components/RouteGuard.js
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { getToken } from '@/lib/token';
