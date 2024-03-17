@@ -1,29 +1,20 @@
 // components/ServiceListing.js
-
 import React from 'react';
+import styles from '../styles/ServiceListing.module.css'; // Import the CSS module
 
-const ServiceListing = ({ services, onDelete }) => {
+const ServiceListing = ({ services }) => {
   return (
     <div>
-      <h2>Existing Services</h2>
-      <ul>
+      <h1>Services</h1>
+      <div className="service-listing">
         {services.map(service => (
-          <li key={service.id}>
-            <div>
-              <strong>Title:</strong> {service.title}
-            </div>
-            <div>
-              <strong>Price:</strong> {service.price}
-            </div>
-            <div>
-              <strong>Description:</strong> {service.description}
-            </div>
-            <div>
-              <button onClick={() => onDelete(service.id)}>Delete</button>
-            </div>
-          </li>
+          <div key={service._id} className="service-card">
+            <h2>{service.title}</h2>
+            <p>Price: ${service.price}</p>
+            <p>{service.description}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

@@ -96,7 +96,6 @@ export default function MainNav() {
                 <Nav>
                   <NavDropdown title={user.email} id="basic-nav-dropdown">
                     <Link href="/profile" passHref legacyBehavior><Nav.Link><NavDropdown.Item active={router.pathname === "/profile"} onClick={() => setIsExpanded(false)} href="#action/3.1">Profile</NavDropdown.Item></Nav.Link></Link>
-                    <Link href="/dogprofile" passHref legacyBehavior><Nav.Link><NavDropdown.Item active={router.pathname === "/dogprofile"} onClick={() => setIsExpanded(false)} href="#action/3.1">Dog Profile</NavDropdown.Item></Nav.Link></Link>
                     <Link href="/password" passHref legacyBehavior><Nav.Link><NavDropdown.Item active={router.pathname === "/password"} onClick={() => setIsExpanded(false)} href="#action/3.1">Change Password</NavDropdown.Item></Nav.Link></Link>
                     {isAdmin() && <Link href="/service-management" passHref legacyBehavior><Nav.Link><NavDropdown.Item active={router.pathname === "/service-management"} onClick={() => setIsExpanded(false)} href="#action/3.1">Service Management</NavDropdown.Item></Nav.Link></Link>}
                     

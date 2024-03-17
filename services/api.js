@@ -15,4 +15,23 @@ export const createService = async (newServiceData) => {
   }
 };
 
+// Function to delete a service by ID
+export const deleteService = async (serviceId) => {
+  try {
+    await api.delete(`/services/${serviceId}`);
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Function to update a service by ID
+export const updateService = async (serviceId, updatedServiceData) => {
+  try {
+    const response = await api.put(`/services/${serviceId}`, updatedServiceData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default api;

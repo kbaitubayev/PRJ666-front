@@ -1,6 +1,7 @@
 // pages/services.js
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
+import ServiceListing from '../components/ServiceListing'; // Import ServiceListing
 
 const Services = () => {
   const [servicesData, setServicesData] = useState([]);
@@ -11,6 +12,7 @@ const Services = () => {
       try {
         const response = await api.get('/services');
         setServicesData(response.data);
+        console.log('Received services data:', response.data); // Log the received data
       } catch (error) {
         console.error('Error fetching services data:', error);
       }
@@ -18,7 +20,6 @@ const Services = () => {
 
     fetchData();
   }, []);
-  
 
   return (
     <div>
@@ -39,5 +40,6 @@ const Services = () => {
     </div>
   );
 };
+
 
 export default Services;
