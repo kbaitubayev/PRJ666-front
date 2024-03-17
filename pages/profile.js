@@ -1,12 +1,14 @@
-import React, { useState, useEffect, use } from 'react';
+// profile.js
+
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap';
 import api from '../services/api';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
-    const { register, handleSubmit, setValue } = useForm();
+    const { register, handleSubmit } = useForm();
     const [customer, setCustomer] = useState({
         user: {
             email: '',
@@ -19,60 +21,49 @@ const Profile = () => {
     const [user, setUser] = useState(null);
     const router = useRouter();
 
-    // Set form values with customer data whenever the customer object changes
-    useEffect(() => {
-        setValue('name', customer.name);
-        setValue('phone', customer.phone);
-        setValue('address', customer.address);
-    }, [customer]);
-    //Get user data from local storage
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem('userLoggedIn')));
     }, []);
 
-    // Fetch customer profile data from the server
     useEffect(() => {
-        const token = localStorage.getItem('authToken');
-        api.get('/customers/profile', {
-            headers: {
-                'x-auth-token': token
-            },
-            body: JSON.stringify(user)
-        })
-            .then(response => {
-                // handle success
+        const fetchCustomerProfile = async () => {
+            try {
+                const token = localStorage.getItem('authToken');
+                const response = await api.get('/customers/profile', {
+                    headers: {
+                        'x-auth-token': token
+                    },
+                    body: JSON.stringify(user)
+                });
                 setCustomer(response.data);
                 localStorage.setItem('userName', response.data.name);
-            })
-            .catch(error => {
-                // handle error
+            } catch (error) {
                 console.log(error);
-            });
+            }
+        };
+        if (user) {
+            fetchCustomerProfile();
+        }
     }, [user]);
 
-
-
-    const onSubmit = (data) => {
-        const token = localStorage.getItem('authToken');
-        api.put('/customers/profile', data, {
-            headers: {
-                'x-auth-token': token
-            }
-        })
-            .then(response => {
-                // handle success
-                console.log(response);
-                toast.success('Profile updated successfully', {
-                    autoClose:1000,
-                    position: "bottom-center"
-                });
-                router.push('/');
-            })
-            .catch(error => {
-                // handle error
-                console.log(error);
+    const onSubmit = async (data) => {
+        try {
+            const token = localStorage.getItem('authToken');
+            const response = await api.put('/customers/profile', data, {
+                headers: {
+                    'x-auth-token': token
+                }
             });
-    }
+            console.log(response);
+            toast.success('Profile updated successfully', {
+                autoClose: 1000,
+                position: "bottom-center"
+            });
+            router.push('/');
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <>
@@ -80,8 +71,7 @@ const Profile = () => {
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group className="mb-3" controlId="formGridName">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control defaultValue={customer.name}
-                        {...register('name')} />
+                    <Form.Control defaultValue={customer.name} {...register('name')} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formGridEmail">
@@ -91,14 +81,12 @@ const Profile = () => {
 
                 <Form.Group className="mb-3" controlId="formGridPhone">
                     <Form.Label>Phone Number</Form.Label>
-                    <Form.Control defaultValue={customer.phone}
-                        {...register('phone')} />
+                    <Form.Control defaultValue={customer.phone} {...register('phone')} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formGridAddress">
                     <Form.Label>Address</Form.Label>
-                    <Form.Control defaultValue={customer.address}
-                        {...register('address')} />
+                    <Form.Control defaultValue={customer.address} {...register('address')} />
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
@@ -106,7 +94,7 @@ const Profile = () => {
                 </Button>
             </Form>
         </>
-    )
+    );
 }
 
-export default Profile
+export default Profile;
