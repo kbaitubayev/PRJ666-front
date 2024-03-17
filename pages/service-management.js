@@ -1,17 +1,16 @@
+//pages/service-management.js
 import React, { useState, useEffect } from 'react';
-import ServiceListing from '../components/ServiceListing';
+import ServiceListingAdmin from '../components/ServiceListingAdmin';
 import CreateServiceForm from '../components/CreateServiceForm'; // Import the CreateServiceForm component
-import { fetchServices, deleteService } from './services'; // Import your API functions
+import { deleteService } from './services'; // Import your API functions
 import { createService } from '../services/api'; // Adjust the path as needed
 import api from '../services/api';
-
 
 const ServiceManagementPage = () => {
   const [services, setServices] = useState([]);
 
- // Fetch existing services from the backend when the page loads
- useEffect(() => {
-  const getServices = async () => {
+  // Function to fetch services from the backend
+  const fetchServices = async () => {
     try {
       const response = await api.get('/services');
       setServices(response.data);
@@ -20,29 +19,29 @@ const ServiceManagementPage = () => {
     }
   };
 
-  getServices();
-}, []);
-
+  // Fetch existing services from the backend when the page loads
+  useEffect(() => {
+    fetchServices();
+  }, []);
 
   // Function to handle service deletion
   const handleDeleteService = async (serviceId) => {
     try {
       await deleteService(serviceId);
-      // Update services list after deletion
-      const updatedServices = services.filter(service => service.id !== serviceId);
-      setServices(updatedServices);
+      // Refetch services after deletion
+      fetchServices();
     } catch (error) {
       console.error('Error deleting service:', error);
     }
   };
 
-// Function to handle creation of a new service
-const handleCreateService = async (formData) => {
+  // Function to handle creation of a new service
+  const handleCreateService = async (formData) => {
     try {
       // Perform API call to create a new service
       const newService = await createService(formData);
-      // Update services list after creation
-      setServices([...services, newService]);
+      // Refetch services after creation
+      fetchServices();
     } catch (error) {
       console.error('Error creating service:', error);
     }
@@ -53,9 +52,11 @@ const handleCreateService = async (formData) => {
       <h1>Service Management</h1>
       {/* Render the CreateServiceForm component */}
       <CreateServiceForm onCreate={handleCreateService} />
-      <ServiceListing
+      {/* Pass fetchServices as a prop to ServiceListingAdmin */}
+      <ServiceListingAdmin
         services={services}
         onDelete={handleDeleteService}
+        fetchServices={fetchServices}
       />
     </div>
   );

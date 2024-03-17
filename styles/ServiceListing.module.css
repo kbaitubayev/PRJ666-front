@@ -1,0 +1,33 @@
+/* styles/ServiceListing.module.css */
+.service-listing-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.service-listing {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.service-card {
+  width: calc(33.33% - 20px); /* 3 cards per row with some margin */
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .service-card {
+    width: calc(50% - 20px); /* 2 cards per row on smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .service-card {
+    width: 100%; /* 1 card per row on extra small screens */
+  }
+}
