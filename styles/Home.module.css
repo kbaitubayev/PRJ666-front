@@ -1,0 +1,122 @@
+.services-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.service-card {
+    /* Add your styles here */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out;
+    background-color: #f8f9fa;
+    /* This is a light gray color */
+}
+
+.service-card:hover {
+    transform: scale(1.05);
+}
+
+.section-title {
+    text-align: center;
+}
+
+.icon {
+    color: #333;
+    /* Change color as needed */
+    margin-right: 10px;
+    /* Add some space between the icon and the text */
+    font-size: 20px;
+    /* Adjust the size of the icon */
+    transition: color 0.3s ease;
+    /* Add transition for smooth color change */
+}
+
+.icon:hover {
+    color: #007bff;
+    /* Change color on hover */
+}
+
+.card-title {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+
+.row-style {
+    width: 80%;
+    max-width: 1080px;
+    margin: 40px 0;
+    position: relative;
+    padding: 27px 0;
+}
+
+.services-section {
+    background-color: #f0f0f0;
+    /* Replace with your preferred color */
+}
+
+.service-image {
+    border-radius: 100px 0 0 0;
+    /* Adjust as needed */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    object-fit: cover;
+    width: 396px;
+    height: 283px;
+}
+
+.service-description h2 {
+    font-size: 50px;
+    color: #333;
+    line-height: 1.4em;
+}
+
+.service-description ul {
+    line-height: 26px;
+    padding: 0 0 23px 1em;
+}
+
+/* styles.css or your preferred CSS file */
+
+.title {
+    color: red;
+    font-weight: bold;
+    animation: blink 1s infinite;
+    /* Apply blinking animation */
+}
+
+.message {
+    color: red;
+    font-weight: bold;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* styles/Home.module.css */
+.service-pic-container {
+    height: 200px;
+    /* Set the desired fixed height */
+    overflow: hidden;
+}
+
+.service-pic {
+    max-width: 100%;
+    /* Set the maximum width */
+    height: auto;
+    /* Let the height adjust automatically to maintain aspect ratio */
+    object-fit: cover;
+    /* Maintain aspect ratio and cover the container */
+}
