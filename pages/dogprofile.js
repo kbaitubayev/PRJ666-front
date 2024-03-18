@@ -23,6 +23,10 @@ const DogProfile = () => {
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem('userLoggedIn')));
     }, []);
+    
+
+
+    
 
     
 
@@ -45,6 +49,7 @@ const DogProfile = () => {
             toast.error('Failed to update dog profile');
         }
     };
+    
 
     return (
         <>
