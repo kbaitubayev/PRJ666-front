@@ -23,10 +23,21 @@ const DogProfile = () => {
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem('userLoggedIn')));
     }, []);
-    
 
-
-    
+    const fetchDogProfile = async () => {
+        try {
+            const token = localStorage.getItem('authToken');
+            const response = await api.get('/dogprofile', {
+                headers: {
+                    'x-auth-token': token
+                }
+            });
+            setDogProfile(response.data); // Update dogProfile state with fetched data
+        } catch (error) {
+            console.error('Error fetching dog profile:', error);
+            toast.error('Failed to fetch dog profile');
+        }
+    };
 
     
 
@@ -49,7 +60,6 @@ const DogProfile = () => {
             toast.error('Failed to update dog profile');
         }
     };
-    
 
     return (
         <>
