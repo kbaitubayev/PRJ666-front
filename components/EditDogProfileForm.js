@@ -31,21 +31,21 @@ const EditDogProfileForm = ({ dogProfile, onUpdate }) => {
 
   return (
     <div>
-      <h2>Edit Dog Profile</h2>
+      <h2 style={{ marginBottom: '20px' }}>Edit Dog Profile</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
+        <div style={{ marginBottom: '10px' }}>
+          <label style={{ marginRight: '10px' }}>Name:</label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} required />
         </div>
-        <div>
-          <label>Breed:</label>
+        <div style={{ marginBottom: '10px' }}>
+          <label style={{ marginRight: '10px' }}>Breed:</label>
           <input type="text" name="breed" value={formData.breed} onChange={handleChange} required />
         </div>
-        <div>
-          <label>Age:</label>
+        <div style={{ marginBottom: '10px' }}>
+          <label style={{ marginRight: '10px' }}>Age:</label>
           <input type="text" name="age" value={formData.age} onChange={handleChange} required />
         </div>
-        <button type="submit">Update Dog Profile</button>
+        <button type="submit" style={{ backgroundColor: 'blue', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Update Dog Profile</button>
       </form>
     </div>
   );

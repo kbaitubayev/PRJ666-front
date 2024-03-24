@@ -25,23 +25,24 @@ const DogProfileListing = ({ dogProfiles, fetchDogProfiles }) => {
 
   return (
     <div>
-      <h2>Existing Dog Profiles</h2>
-      <ul>
+      <h2 style={{ marginBottom: '20px' }}>Existing Dog Profiles</h2>
+      <ul style={{ listStyleType: 'none', padding: 0 }}>
         {dogProfiles.map(dogProfile => (
-          <li key={dogProfile._id}>
-            <div>
+          <li key={dogProfile._id} style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
+            <div style={{ marginBottom: '10px' }}>
               <strong>Name:</strong> {dogProfile.name}
             </div>
-            <div>
+            <div style={{ marginBottom: '10px' }}>
               <strong>Breed:</strong> {dogProfile.breed}
             </div>
-            <div>
+            <div style={{ marginBottom: '10px' }}>
               <strong>Age:</strong> {dogProfile.age}
             </div>
+            
             <div>
-              <button onClick={() => handleDelete(dogProfile._id)}>Delete</button>
+              <button onClick={() => handleDelete(dogProfile._id)} style={{ backgroundColor: '#f44336', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '4px', cursor: 'pointer', marginRight: '10px' }}>Delete</button>
               {!editingDogProfileId && (
-                <button onClick={() => handleEditClick(dogProfile._id)}>Edit</button>
+                <button onClick={() => handleEditClick(dogProfile._id)} style={{ backgroundColor: 'blue', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Edit</button>
               )}
             </div>
             {editingDogProfileId === dogProfile._id && (

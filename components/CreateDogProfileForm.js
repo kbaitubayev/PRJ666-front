@@ -34,20 +34,21 @@ const CreateDogProfileForm = ({ onCreate }) => {
     <div>
       <h2>Create New Dog Profile</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div style={{ marginBottom: '20px' }}>
           <label>Name:</label>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+          <input type="text" name="name" value={formData.name} onChange={handleChange} required style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px', boxSizing: 'border-box' }} />
         </div>
-        <div>
+        <div style={{ marginBottom: '20px' }}>
           <label>Breed:</label>
-          <input type="text" name="breed" value={formData.breed} onChange={handleChange} required />
+          <input type="text" name="breed" value={formData.breed} onChange={handleChange} required style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px', boxSizing: 'border-box' }} />
         </div>
-        <div>
+        <div style={{ marginBottom: '20px' }}>
           <label>Age:</label>
-          <input type="text" name="age" value={formData.age} onChange={handleChange} required />
+          <input type="text" name="age" value={formData.age} onChange={handleChange} required style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px', boxSizing: 'border-box' }} />
         </div>
+        
         {/* Add more fields as needed for dog profile creation */}
-        <button type="submit">Create Dog Profile</button>
+        <button type="submit" style={{ backgroundColor: 'blue', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Create Dog Profile</button>
       </form>
     </div>
   );
