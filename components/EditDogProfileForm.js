@@ -45,7 +45,7 @@ const EditDogProfileForm = ({ dogProfile, onUpdate }) => {
           <label style={{ marginRight: '10px' }}>Age:</label>
           <input type="text" name="age" value={formData.age} onChange={handleChange} required />
         </div>
-        <button type="submit" style={{ backgroundColor: 'blue', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Update Dog Profile</button>
+        <button type="submit" style={{ backgroundColor: '#007bff', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Update Dog Profile</button>
       </form>
     </div>
   );

@@ -48,7 +48,7 @@ const CreateDogProfileForm = ({ onCreate }) => {
         </div>
         
         {/* Add more fields as needed for dog profile creation */}
-        <button type="submit" style={{ backgroundColor: 'blue', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Create Dog Profile</button>
+        <button type="submit" style={{ backgroundColor: '#007bff', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Create Dog Profile</button>
       </form>
     </div>
   );

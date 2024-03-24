@@ -42,7 +42,7 @@ const DogProfileListing = ({ dogProfiles, fetchDogProfiles }) => {
             <div>
               <button onClick={() => handleDelete(dogProfile._id)} style={{ backgroundColor: '#f44336', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '4px', cursor: 'pointer', marginRight: '10px' }}>Delete</button>
               {!editingDogProfileId && (
-                <button onClick={() => handleEditClick(dogProfile._id)} style={{ backgroundColor: 'blue', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Edit</button>
+                <button onClick={() => handleEditClick(dogProfile._id)} style={{ backgroundColor: '#007bff', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Edit</button>
               )}
             </div>
             {editingDogProfileId === dogProfile._id && (
