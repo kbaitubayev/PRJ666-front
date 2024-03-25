@@ -38,14 +38,20 @@ const CreateFeedbackForm = ({ onCreate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await onCreate(formData);
-    // Show feedback submission confirmation toast
-    toast.success('Feedback submitted successfully', {
-      autoClose: 3000, // Auto close the toast after 3 seconds
-      position: "bottom-center" // Display toast at the bottom-center
-    });
-    // Redirect to home page after successful submission
-    router.push('/');
+    if (formData.rating === 0) {
+      // If no rating is given, display an error toast
+      toast.error('Please give a star rating');
+    } else {
+      // If a rating is given, proceed with feedback submission
+      await onCreate(formData);
+      // Show feedback submission confirmation toast
+      toast.success('Feedback submitted successfully', {
+        autoClose: 3000, // Auto close the toast after 3 seconds
+        position: "bottom-center" // Display toast at the bottom-center
+      });
+      // Redirect to home page after successful submission
+      router.push('/');
+    }
   };
 
   return (
