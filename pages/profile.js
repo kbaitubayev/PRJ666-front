@@ -40,6 +40,7 @@ const Profile = () => {
                 });
                 // Update customer state with fetched data
                 setCustomer(response.data);
+                console.log(response.data._id);
                 localStorage.setItem('userName', response.data.name);
             } catch (error) {
                 console.log(error);
