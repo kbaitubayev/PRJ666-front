@@ -135,6 +135,11 @@ export default function MainNav() {
                   Contact
                 </Nav.Link>
               </Link>
+              <Link href="/feedback" passHref legacyBehavior>
+                <Nav.Link href="/feedback" style={{ marginRight: "10px", fontWeight: "bold" }} active={router.pathname === "/feedback"}>
+                  Feedback
+                </Nav.Link>
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
