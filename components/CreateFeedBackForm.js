@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify'; // Import the toast library
+import 'react-toastify/dist/ReactToastify.css'; // Import toast CSS
 
 const CreateFeedbackForm = ({ onCreate }) => {
   const [formData, setFormData] = useState({
@@ -14,11 +16,17 @@ const CreateFeedbackForm = ({ onCreate }) => {
       [name]: value
     }));
   };
+
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await onCreate(formData);
+    // Show feedback submission confirmation toast
+    toast.success('Feedback submitted successfully', {
+      autoClose: 3000, // Auto close the toast after 3 seconds
+      position: "bottom-center" // Display toast at the bottom-center
+    });
     // Redirect to home page after successful submission
     router.push('/');
   };
