@@ -19,7 +19,7 @@ const Profile = () => {
         phone: '',
         address: ''
     });
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState('');
     const router = useRouter();
 
     useEffect(() => {
@@ -40,7 +40,6 @@ const Profile = () => {
                 });
                 // Update customer state with fetched data
                 setCustomer(response.data);
-                console.log(response.data._id);
                 localStorage.setItem('userName', response.data.name);
             } catch (error) {
                 console.log(error);

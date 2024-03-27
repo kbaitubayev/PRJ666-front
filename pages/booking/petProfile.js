@@ -3,13 +3,21 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const PetProfile = () => {
     const [medicalHistory, setMedicalHistory] = useState(null);
+    const router = useRouter();
 
     const handleRadioChange = (event) => {
-      setMedicalHistory(event.target.id);
+        setMedicalHistory(event.target.id);
+
     };
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        router.push('/booking/payment');
+    }
 
     return (
         <>
@@ -62,9 +70,9 @@ const PetProfile = () => {
                 </Row>
 
                 <Row className="mb-3">
-                        <Form.Label>When was your pet last grooming appointment?</Form.Label>
-                <Form.Group as={Col} controlId="formGridPetLastAppointment">
-                <Form.Check
+                    <Form.Label>When was your pet last grooming appointment?</Form.Label>
+                    <Form.Group as={Col} controlId="formGridPetLastAppointment">
+                        <Form.Check
                             type="radio"
                             label="Less than 1 month ago"
                             name="petLastAppointment"
@@ -85,7 +93,7 @@ const PetProfile = () => {
 
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGridPetLastAppointment">
-                <Form.Check
+                        <Form.Check
                             type="radio"
                             label="Less than 3 month ago"
                             name="petLastAppointment"
@@ -99,7 +107,7 @@ const PetProfile = () => {
                         />
 
                     </Form.Group>
-                    
+
                 </Row>
 
                 <Row className="mb-3">
@@ -119,11 +127,11 @@ const PetProfile = () => {
                             id="noHistory"
                             onChange={handleRadioChange}
                         />
-                         {medicalHistory === 'noHistory' && <Form.Control as="textarea" rows={3} />}
+                        {medicalHistory === 'noHistory' && <Form.Control as="textarea" rows={3} />}
                     </Form.Group>
                 </Row>
 
-                <Button variant="primary" type="submit"> Submit </Button>
+                <Button variant="primary" type="submit" onClick={handleClick}> Submit </Button>
             </Form>
 
         </>
