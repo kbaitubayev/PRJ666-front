@@ -6,32 +6,49 @@ import { useRouter } from 'next/router';
 import api from '../../services/api';
 import 'react-calendar/dist/Calendar.css';
 import '../../styles/Booking.module.css'
-import { toast } from 'react-toastify';
 import { useAtom } from 'jotai';
-import {userAtom, profileAtom, dateTimeAtom, serviceAtom, appointmentAtom, customerAtom } from '../../store';
-import { set } from 'date-fns';
+import { userAtom, profileAtom, dateTimeAtom, serviceAtom, customerAtom } from '../../store';
 
 const BookDate = () => {
     const router = useRouter();
+    const mode = router.query.appointment ? 'update' : 'create';
+    const [existingAppointment, setExistingAppointment] = useState(router.query.appointment ? JSON.parse(router.query.appointment) : null);
 
     const [customerId, setCustomerId] = useAtom(customerAtom);
     const [services, setServices] = useState([]);
     const [date, setDate] = useState(new Date());
-    const [time, setTime] = useState('10:00 AM');
+    const [time, setTime] = useState(existingAppointment ? existingAppointment.time : '10:00 AM');
 
     const [user, setUser] = useAtom(userAtom);
-    const [apm, setApm] = useAtom(appointmentAtom);
     const [profile, setProfile] = useAtom(profileAtom);
     const [dateTime, setDateTime] = useAtom(dateTimeAtom);
     const [selectedService, setSelectedService] = useAtom(serviceAtom);
 
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        router.push('/booking/customerProfile');
 
-        setDateTime([date, time])
+        if (mode === 'update') {
+            try {
+                setDateTime([date, time]);
+                const updatedAppointment = await api.put(`/appointments/${existingAppointment._id}`, {
+                    date: dayjs(date).format('YYYY-MM-DD').toString(),
+                    time: time,
+                    serviceType: selectedService._id,
+                    customer: customerId
+
+                });
+
+                console.log('Updated appointment:', updatedAppointment.data);
+                console.log(date, time);
+
+                router.push('../appointment')
+            } catch (error) {
+                console.error(error);
+            }
+        } else {
+            router.push('/booking/customerProfile');
+            setDateTime([date, time]);
+        }
     };
 
     // Fetch services data from the server
@@ -53,11 +70,13 @@ const BookDate = () => {
         const fetchAppointment = async () => {
             try {
                 const response = await api.get('/appointments');
-                console.log('Appointments:', dayjs(response.data[4].date).format('YYYY-MM-DD'))  ;
+                console.log('Appointments:', dayjs(response.data[4].date).format('YYYY-MM-DD'));
             } catch (error) {
                 console.error('Error fetching appointments:', error);
             }
         };
+
+        
 
         fetchAppointment();
         fetchService();
@@ -107,7 +126,7 @@ const BookDate = () => {
                         <Calendar
                             onChange={setDate}
                             value={date}
-                            minDate={new Date()}    
+                            minDate={new Date()}
                         />
                     </div>
 
