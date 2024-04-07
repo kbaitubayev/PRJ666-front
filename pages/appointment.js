@@ -2,22 +2,28 @@ import React, { useState } from "react";
 import { Row, Col, Card, Button, Alert } from "react-bootstrap";
 import dayjs from "dayjs";
 import { useAtom } from "jotai";
-import { appointmentAtom, servicesListAtom } from "@/store";
+import { appointmentAtom, servicesListAtom, customerAtom } from "@/store";
 import api from "@/services/api";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 
+
 const Appointment = () => {
+    const router = useRouter();
     const [appointments, setAppointments] = useState([]);
     const [services] = useAtom(servicesListAtom);
-    const router = useRouter();
+    const [customer] = useAtom(customerAtom);
 
+
+    console.log(appointments);
     useEffect(() => {
         const fetchAppointments = async () => {
             try {
-                const response = await api.get("/appointments");
-                setAppointments(response.data);
+                const response = await api.get(`/appointments/${customer._id}`);
+                if (response.data) {
+                    setAppointments(response.data);
+                }
                 console.log(response.data);
             } catch (error) {
                 console.error(error);

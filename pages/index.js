@@ -9,6 +9,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import styles from '../styles/Home.module.css'; // Import the CSS module
+import { useAtom } from 'jotai';
+import { customerAtom } from '../store';
 
 const replaceNewlinesWithBr = (text) => {
   return { __html: text.replace(/\n/g, '<br/>') };
@@ -16,6 +18,8 @@ const replaceNewlinesWithBr = (text) => {
 
 const Home = () => {
   const [homeData, setHomeData] = useState(null);
+  const [user, setUser] = useState('');
+  const [customer, setCustomer] = useAtom(customerAtom);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,8 +31,34 @@ const Home = () => {
       }
     };
 
+    setUser(JSON.parse(localStorage.getItem('userLoggedIn')));
+
     fetchData();
   }, []);
+
+  // Fetch customer profile data from the server
+  useEffect(() => {
+    const fetchCustomerProfile = async () => {
+      try {
+        const token = localStorage.getItem('authToken');
+        const response = await api.get('/customers/profile', {
+          headers: {
+            'x-auth-token': token
+          },
+          body: JSON.stringify(user)
+        });
+        // Update customer state with fetched data
+        setCustomer(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    // Fetch customer profile when user state changes
+    if (user) {
+      fetchCustomerProfile();
+    }
+  }, [user]);
 
   return (
     <Container>

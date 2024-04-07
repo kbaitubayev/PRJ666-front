@@ -67,18 +67,7 @@ const BookDate = () => {
             }
         };
 
-        const fetchAppointment = async () => {
-            try {
-                const response = await api.get('/appointments');
-                console.log('Appointments:', dayjs(response.data[4].date).format('YYYY-MM-DD'));
-            } catch (error) {
-                console.error('Error fetching appointments:', error);
-            }
-        };
-
         
-
-        fetchAppointment();
         fetchService();
     }, []);
 
@@ -96,6 +85,7 @@ const BookDate = () => {
                 // Update customer state with fetched data
                 setCustomerId(response.data._id);
                 setProfile(response.data);
+                console.log('Customer profile:', response.data);
             } catch (error) {
                 setProfile('');
                 console.log(error);
