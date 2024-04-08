@@ -1,7 +1,49 @@
-import React from 'react';
+// FeedbackListing.js
+import React, { useState, useEffect } from 'react';
 import { deleteFeedback } from '../feedback/api'; // Import the deleteFeedback function
 
 const FeedbackListing = ({ feedbacks, fetchFeedbacks }) => {
+  // State to store the average ratings for each service
+  const [averageRatings, setAverageRatings] = useState({});
+  // State to store comments for each service
+  const [commentsByService, setCommentsByService] = useState({});
+
+  // Function to group feedbacks by service and calculate average rating for each service
+  const calculateAverageRatings = () => {
+    const ratingsByService = {};
+    const countsByService = {};
+    const commentsByService = {};
+
+    // Initialize ratings, counts, and comments for each service
+    feedbacks.forEach(feedback => {
+      if (!ratingsByService[feedback.service]) {
+        ratingsByService[feedback.service] = feedback.rating;
+        countsByService[feedback.service] = 1;
+        commentsByService[feedback.service] = [feedback.comment];
+      } else {
+        ratingsByService[feedback.service] += feedback.rating;
+        countsByService[feedback.service]++;
+        commentsByService[feedback.service].push(feedback.comment);
+      }
+    });
+
+    // Calculate average rating for each service
+    const averageRatings = {};
+    Object.keys(ratingsByService).forEach(service => {
+      averageRatings[service] = (ratingsByService[service] / countsByService[service]).toFixed(2);
+    });
+
+    return { averageRatings, commentsByService };
+  };
+
+  // Update average ratings and comments when feedbacks change
+  useEffect(() => {
+    const { averageRatings, commentsByService } = calculateAverageRatings();
+    setAverageRatings(averageRatings);
+    setCommentsByService(commentsByService);
+  }, [feedbacks]);
+
+  // Function to handle deletion of a feedback entry
   const handleDelete = async (feedbackId) => {
     try {
       await deleteFeedback(feedbackId);
@@ -11,24 +53,26 @@ const FeedbackListing = ({ feedbacks, fetchFeedbacks }) => {
       console.error('Error deleting feedback entry:', error);
     }
   };
-  
+
   return (
     <div>
-      <h2 style={{ marginBottom: '20px' }}>Existing Feedback Entries</h2>
       <ul style={{ listStyleType: 'none', padding: 0 }}>
-        {feedbacks.map(feedback => (
-          <li key={feedback._id} style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
+        {/* Render average ratings and comments for each service */}
+        {Object.keys(averageRatings).map(service => (
+          <li key={service} style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
             <div style={{ marginBottom: '10px' }}>
-              <strong>Rating:</strong> {feedback.rating}
+              <strong>Service:</strong> {service}
             </div>
             <div style={{ marginBottom: '10px' }}>
-              <strong>Comment:</strong> {feedback.comment}
-            </div>
-            <div style={{ marginBottom: '10px' }}>
-              <strong>Service:</strong> {feedback.service}
+              <strong>Average Rating:</strong> {averageRatings[service]}
             </div>
             <div>
-              <button onClick={() => handleDelete(feedback._id)} style={{ backgroundColor: '#f44336', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '4px', cursor: 'pointer', marginRight: '10px' }}>Delete</button>
+              <strong>User Comments:</strong>
+              <ul>
+                {commentsByService[service] && commentsByService[service].map((comment, index) => (
+                  <li key={index}>{comment}</li>
+                ))}
+              </ul>
             </div>
           </li>
         ))}

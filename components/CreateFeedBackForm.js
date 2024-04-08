@@ -15,7 +15,7 @@ const CreateFeedbackForm = ({ onCreate }) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
-      [name]: value
+      [name]: name === 'rating' ? parseFloat(value) : value // Parse rating as float
     }));
   };
 
