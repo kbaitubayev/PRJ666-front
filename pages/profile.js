@@ -19,7 +19,7 @@ const Profile = () => {
         phone: '',
         address: ''
     });
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState('');
     const router = useRouter();
 
     useEffect(() => {
