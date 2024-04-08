@@ -167,7 +167,7 @@ const Payment = () => {
                                 Welcome to Dog Grooming Service! We offer professional dog grooming services, including [list services such as washing, trimming, nail clipping, etc.], designed to keep your pet healthy, clean, and happy.</p>
 
                             <p><strong>2. Acceptance of Terms</strong><br />
-                                By booking an appointment with us, you agree to be bound by these General Terms of Service (the "Terms"), which govern our relationship with you in relation to this website and our services. If you disagree with any part of these terms, please do not use our services.</p>
+                                By booking an appointment with us, you agree to be bound by these General Terms of Service , which govern our relationship with you in relation to this website and our services. If you disagree with any part of these terms, please do not use our services.</p>
 
                             <p><strong>3. Booking Appointments</strong><br />
                                 Appointments can be made via our website, phone, or in person.<br />

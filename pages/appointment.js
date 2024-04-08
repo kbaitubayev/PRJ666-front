@@ -52,6 +52,7 @@ const Appointment = () => {
             pathname: '/booking',
             query: { appointment: JSON.stringify(appointment) }
         });
+
     };
 
     const openModal = (appointmentId) => {

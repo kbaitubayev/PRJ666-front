@@ -38,7 +38,7 @@ const BookDate = () => {
 
                 });
 
-                router.push('../appointment')
+                router.push('/appointment');
             } catch (error) {
                 console.error(error);
             }
@@ -67,34 +67,6 @@ const BookDate = () => {
 
         fetchService();
     }, []);
-
-    // Fetch customer profile data from the server
-    useEffect(() => {
-        const fetchCustomerProfile = async () => {
-            try {
-                const token = localStorage.getItem('authToken');
-                const response = await api.get('/customers/profile', {
-                    headers: {
-                        'x-auth-token': token
-                    },
-                    body: JSON.stringify(user)
-                });
-                // Update customer state with fetched data
-                setCustomerId(response.data._id);
-                setProfile(response.data);
-                console.log('Customer profile:', response.data);
-            } catch (error) {
-                setProfile('');
-                console.log(error);
-            }
-        };
-
-        // Fetch customer profile when user state changes
-        if (user) {
-            fetchCustomerProfile();
-        }
-    }, [user]);
-
 
     // HANDLE SERVICE CHANGE
     const handleServiceChange = (e) => {
