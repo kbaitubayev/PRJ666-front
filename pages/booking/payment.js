@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Row, Col, Card } from 'react-bootstrap';
+import { Form, Button, Row, Col, Card, Modal } from 'react-bootstrap';
 import { useAtom } from 'jotai';
 import dayjs from 'dayjs';
 import { dateTimeAtom, serviceAtom, customerAtom, customerNoLoginAtom } from '@/store';
@@ -16,7 +16,25 @@ const Payment = () => {
 
     const router = useRouter();
     const [isChecked, setIsChecked] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
+    const openModal = () => {
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
+    const renderLabel = () => (
+        <>
+            By making a payment, you agree to our{' '}
+            <span style={{ cursor: 'pointer', color: 'blue' }} onClick={openModal}>
+                General Terms of Service
+            </span>
+            .
+        </>
+    );
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -130,7 +148,7 @@ const Payment = () => {
                 </Col>
                 <Col xs={12}>
                     <Form.Group controlId="formBasicCheckbox" className='my-3'>
-                        <Form.Check type="checkbox" label="I agree to the General Terms of Service" onChange={e => setIsChecked(e.target.checked)} />
+                        <Form.Check type="checkbox" label={renderLabel()} onChange={e => setIsChecked(e.target.checked)} />
                     </Form.Group>
 
                     <div className='text-center'>
@@ -138,6 +156,57 @@ const Payment = () => {
                             Book Appointment
                         </Button>
                     </div>
+
+                    <Modal show={showModal} onHide={closeModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>General Terms of Service</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <p><strong>General Terms of Service for Dog Grooming Service</strong></p>
+                            <p><strong>1. Introduction</strong><br />
+                                Welcome to Dog Grooming Service! We offer professional dog grooming services, including [list services such as washing, trimming, nail clipping, etc.], designed to keep your pet healthy, clean, and happy.</p>
+
+                            <p><strong>2. Acceptance of Terms</strong><br />
+                                By booking an appointment with us, you agree to be bound by these General Terms of Service (the "Terms"), which govern our relationship with you in relation to this website and our services. If you disagree with any part of these terms, please do not use our services.</p>
+
+                            <p><strong>3. Booking Appointments</strong><br />
+                                Appointments can be made via our website, phone, or in person.<br />
+                                A valid email address and contact number must be provided for booking confirmation and any communication related to your appointment.</p>
+
+                            <p><strong>4. Cancellation and Rescheduling</strong><br />
+                                We require a minimum of [24/48] hours notice to cancel or reschedule an appointment without charge.<br />
+                                Cancellations or rescheduling within [24/48] hours of your appointment may incur a [percentage] cancellation fee.</p>
+
+                            <p><strong>5. Prices and Payment</strong><br />
+                                Prices for our grooming services are listed on our website and are subject to change without notice.<br />
+                                Payment is due at the time of service. We accept [list accepted payment methods].</p>
+
+                            <p><strong>6. Health and Safety</strong><br />
+                                For the safety of all pets and staff, we require that all dogs be up to date with their vaccinations.<br />
+                                Owners must inform us of any health issues or special needs their dog may have prior to the grooming session.</p>
+
+                            <p><strong>7. Liability</strong><br />
+                                While we strive to provide the highest level of care, grooming may expose pre-existing health or skin conditions. We are not liable for any conditions revealed during grooming.<br />
+                                Owners are liable for any damages or injuries caused by their pet to our groomers or property.</p>
+
+                            <p><strong>8. Data Protection</strong><br />
+                                We commit to protecting your personal data. Information collected during booking and service provision will be used in accordance with our Privacy Policy.</p>
+
+                            <p><strong>9. Changes to These Terms</strong><br />
+                                We reserve the right to modify these Terms at any time. Changes will be effective immediately upon posting on our website.</p>
+
+                            <p><strong>10. Governing Law</strong><br />
+                                These Terms are governed by and construed in accordance with the laws of [Your Country/State].</p>
+
+                            <p><strong>11. Contact Us</strong><br />
+                                For any questions or concerns regarding our services or these Terms, please contact us at [contact information].</p>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={closeModal}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </Col>
             </Row>
         </>

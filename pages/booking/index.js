@@ -38,9 +38,6 @@ const BookDate = () => {
 
                 });
 
-                console.log('Updated appointment:', updatedAppointment.data);
-                console.log(date, time);
-
                 router.push('../appointment')
             } catch (error) {
                 console.error(error);
@@ -67,7 +64,7 @@ const BookDate = () => {
             }
         };
 
-        
+
         fetchService();
     }, []);
 

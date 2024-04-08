@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Card, Button, Alert } from "react-bootstrap";
+import { Row, Col, Card, Button, Alert, Modal } from "react-bootstrap";
 import dayjs from "dayjs";
 import { useAtom } from "jotai";
 import { appointmentAtom, servicesListAtom, customerAtom } from "@/store";
@@ -14,6 +14,8 @@ const Appointment = () => {
     const [appointments, setAppointments] = useState([]);
     const [services] = useAtom(servicesListAtom);
     const [customer] = useAtom(customerAtom);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedAppointment, setSelectedAppointment] = useState(null);
 
 
     console.log(appointments);
@@ -32,21 +34,47 @@ const Appointment = () => {
         fetchAppointments();
     }, []);
 
-    const handleCancel = async (appointmentId) => {
-        try {
-            await api.delete(`/appointments/${appointmentId}`);
-            setAppointments(appointments.filter(appointment => appointment._id !== appointmentId));
-        } catch (error) {
-            console.error(error);
+    const handleCancel = async () => {
+        if (selectedAppointment) {
+            try {
+                await api.delete(`/appointments/${selectedAppointment}`);
+                setAppointments(appointments.filter(appointment => appointment._id !== selectedAppointment));
+                setShowModal(false);
+            } catch (error) {
+                console.error(error);
+            }
         }
+
     };
 
     const handleUpdate = (appointment) => {
         router.push({
-          pathname: '/booking',
-          query: { appointment: JSON.stringify(appointment) }
+            pathname: '/booking',
+            query: { appointment: JSON.stringify(appointment) }
         });
-      };
+    };
+
+    const openModal = (appointmentId) => {
+        setSelectedAppointment(appointmentId);
+        setShowModal(true);
+    };
+
+    const CancelAppointmentModal = ({ showModal, setShowModal, handleCancel }) => (
+        <Modal show={showModal} onHide={() => setShowModal(false)}>
+            <Modal.Header closeButton>
+                <Modal.Title>Cancel Appointment</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Are you sure you want to cancel this appointment? Please be aware of our cancellation policy.</Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShowModal(false)}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={handleCancel}>
+                    Confirm Cancel
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    );
 
     return (
         <div>
@@ -76,8 +104,14 @@ const Appointment = () => {
                                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
                                         <div></div>
                                         <div>
-                                            <Button variant="outline-primary" onClick={() => handleUpdate(appointment)}>Update</Button>
-                                            <Button variant="danger" onClick={() => handleCancel(appointment._id)}>Cancel X</Button>
+                                            <Button variant="outline-primary" style={{ marginRight: '10px' }} onClick={() => handleUpdate(appointment)}>Update</Button>
+                                            <Button variant="danger" onClick={() => openModal(appointment._id)}>Cancel</Button>
+
+                                            <CancelAppointmentModal
+                                                showModal={showModal}
+                                                setShowModal={setShowModal}
+                                                handleCancel={handleCancel}
+                                            />
                                         </div>
                                     </div>
                                 </Card.Body>
@@ -85,6 +119,7 @@ const Appointment = () => {
                         </Col>
                     </Row>
                 )))}
+
         </div>
     );
 };
