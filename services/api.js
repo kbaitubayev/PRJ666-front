@@ -34,4 +34,14 @@ export const updateService = async (serviceId, updatedServiceData) => {
   }
 };
 
+// Function to fetch details of a service by ID
+export const getService = async (serviceId) => {
+  try {
+    const response = await api.get(`/services/${serviceId}`);
+    return response.data; // Return the service object
+  } catch (error) {
+    throw error; // Throw any errors that occur during the API call
+  }
+};
+
 export default api;
