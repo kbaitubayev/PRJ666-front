@@ -132,9 +132,12 @@ const Payment = () => {
                     <Form.Group controlId="formBasicCheckbox" className='my-3'>
                         <Form.Check type="checkbox" label="I agree to the General Terms of Service" onChange={e => setIsChecked(e.target.checked)} />
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={handleSubmit} disabled={!isChecked}>
-                        Submit
-                    </Button>
+
+                    <div className='text-center'>
+                        <Button variant="primary" type="submit" onClick={handleSubmit} disabled={!isChecked}>
+                            Book Appointment
+                        </Button>
+                    </div>
                 </Col>
             </Row>
         </>

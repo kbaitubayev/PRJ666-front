@@ -37,12 +37,12 @@ const CustomerProfile = () => {
 
                 <Form.Group className="mb-3" controlId="formGridName">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control defaultValue={profile.name} {...register('name')} required={!user}/>
+                    <Form.Control defaultValue={profile.name} {...register('name')} required={!user} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formGridEmail">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control type='email' defaultValue={profile.user && profile.user.email ? profile.user.email : ''} readOnly={!!user} {...register('email')} required={!user}/>
+                    <Form.Control type='email' defaultValue={profile.user && profile.user.email ? profile.user.email : ''} readOnly={!!user} {...register('email')} required={!user} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formGridPhone">
@@ -52,11 +52,12 @@ const CustomerProfile = () => {
 
                 <Form.Group className="mb-3" controlId="formGridAddress">
                     <Form.Label>Address</Form.Label>
-                    <Form.Control defaultValue={profile.address} {...register('address')} required={!user}/>
+                    <Form.Control defaultValue={profile.address} {...register('address')} required={!user} />
                 </Form.Group>
 
-
-                <Button variant="primary" type="submit"> Next </Button>
+                <div className='text-center'>
+                    <Button variant="primary" type="submit"> Next → </Button>
+                </div>
             </Form>
 
         </>

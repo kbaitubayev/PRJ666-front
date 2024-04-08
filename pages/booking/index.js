@@ -147,7 +147,7 @@ const BookDate = () => {
 
                     {/* BUTTON */}
                     <div className='text-center my-5'>
-                        <button className='btn btn-primary'>Book Appointment</button>
+                        <button className='btn btn-primary'>{mode === 'update' ? 'Update Appointment' : 'Next →'}</button>
                     </div>
                 </Form>
             </Container>

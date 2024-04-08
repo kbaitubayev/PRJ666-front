@@ -131,7 +131,9 @@ const PetProfile = () => {
                     </Form.Group>
                 </Row>
 
-                <Button variant="primary" type="submit" onClick={handleClick}> Submit </Button>
+                <div className='text-center'>
+                    <Button variant="primary" type="submit" onClick={handleClick}> Next → </Button>
+                </div>
             </Form>
 
         </>
