@@ -68,7 +68,7 @@ const CreateFeedbackForm = ({ onCreate }) => {
       </div>
       <div style={{ marginBottom: '20px' }}>
         <label style={{ display: 'block', marginBottom: '5px' }}>Comment:</label>
-        <textarea name="comment" value={formData.comment} onChange={handleChange} style={{ width: '100%', padding: '8px', borderRadius: '3px', border: '1px solid #ccc', resize: 'vertical' }} required />
+        <textarea name="comment" value={formData.comment} onChange={handleChange} placeholder="If you're not satisfied, how can we improve our services?" style={{ width: '100%', padding: '8px', borderRadius: '3px', border: '1px solid #ccc', resize: 'vertical' }} required />
       </div>
       <div style={{ marginBottom: '20px' }}>
         <label style={{ display: 'block', marginBottom: '5px' }}>Service:</label>

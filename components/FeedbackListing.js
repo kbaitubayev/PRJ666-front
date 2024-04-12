@@ -18,11 +18,11 @@ const FeedbackListing = ({ feedbacks, fetchFeedbacks }) => {
       if (!ratingsByService[feedback.service]) {
         ratingsByService[feedback.service] = feedback.rating;
         countsByService[feedback.service] = 1;
-        commentsByService[feedback.service] = [{ comment: feedback.comment, rating: feedback.rating }];
+        commentsByService[feedback.service] = [{ id: feedback._id, comment: feedback.comment, rating: feedback.rating }];
       } else {
         ratingsByService[feedback.service] += feedback.rating;
         countsByService[feedback.service]++;
-        commentsByService[feedback.service].push({ comment: feedback.comment, rating: feedback.rating });
+        commentsByService[feedback.service].push({ id: feedback._id, comment: feedback.comment, rating: feedback.rating });
       }
     });
 
@@ -43,11 +43,16 @@ const FeedbackListing = ({ feedbacks, fetchFeedbacks }) => {
   }, [feedbacks]);
 
   // Function to handle deletion of a feedback entry
-  const handleDelete = async (feedbackId) => {
+  const handleDelete = async (feedbackId, service) => {
     try {
       await deleteFeedback(feedbackId);
       // After successful deletion, fetch updated list of feedback entries
       fetchFeedbacks();
+      // Remove the deleted feedback entry from commentsByService
+      setCommentsByService(prevState => ({
+        ...prevState,
+        [service]: prevState[service].filter(comment => comment.id !== feedbackId)
+      }));
     } catch (error) {
       console.error('Error deleting feedback entry:', error);
     }
@@ -78,6 +83,7 @@ const FeedbackListing = ({ feedbacks, fetchFeedbacks }) => {
                     <span style={{ fontWeight: 'bold' }}>User Rating: </span>{renderRating(comment.rating)}
                     <br />
                     <span style={{ marginLeft: '20px', fontWeight: 'bold' }}>Comment: </span>{comment.comment}
+                    <button onClick={() => handleDelete(comment.id, service)} style={{ marginLeft: '10px', fontWeight: 'bold', color: 'red', background: 'none', border: 'none', cursor: 'pointer' }}>Delete</button>
                   </li>
                 ))}
               </ul>
