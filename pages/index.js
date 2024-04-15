@@ -12,6 +12,7 @@ import styles from '../styles/Home.module.css'; // Import the CSS module
 import { useAtom } from 'jotai';
 import { customerAtom, profileAtom } from '../store';
 
+
 const replaceNewlinesWithBr = (text) => {
   return { __html: text.replace(/\n/g, '<br/>') };
 };

@@ -102,6 +102,7 @@ export default function MainNav() {
 
                     {isAdmin() && <Link href="/service-management" passHref legacyBehavior><Nav.Link><NavDropdown.Item active={router.pathname === "/service-management"} onClick={() => setIsExpanded(false)} href="#action/3.1">Service Management</NavDropdown.Item></Nav.Link></Link>}
                     {isAdmin() && <Link href="/appointment-management" passHref legacyBehavior><Nav.Link><NavDropdown.Item active={router.pathname === "/appointment-management"} onClick={() => setIsExpanded(false)} href="#action/3.1">Appointment Management</NavDropdown.Item></Nav.Link></Link>}
+                    {isAdmin() && <Link href="/existing-feedback" passHref legacyBehavior><Nav.Link><NavDropdown.Item active={router.pathname === "/appointment-management"} onClick={() => setIsExpanded(false)} href="#action/3.1">Feedback entries</NavDropdown.Item></Nav.Link></Link>}
                     
                     <NavDropdown.Item onClick={() => { setIsExpanded(false); logout(); }}>Logout</NavDropdown.Item>
                   </NavDropdown>

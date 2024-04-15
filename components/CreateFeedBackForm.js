@@ -8,13 +8,14 @@ const CreateFeedbackForm = ({ onCreate }) => {
   const [formData, setFormData] = useState({
     rating: 0, // Initialize rating as 0
     comment: '',
+    service: '', // Initialize service as empty string
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
-      [name]: value
+      [name]: name === 'rating' ? parseFloat(value) : value // Parse rating as float
     }));
   };
 
@@ -56,7 +57,7 @@ const CreateFeedbackForm = ({ onCreate }) => {
 
   return (
     <form onSubmit={handleSubmit} style={{ fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: 'auto', padding: '20px', backgroundColor: '#f4f4f4', borderRadius: '5px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
-      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>How do you feel about us?</h2>
+      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>How do you feel about our services?</h2>
       <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>
         {[...Array(5)].map((_, index) => (
           formData.rating > index ? // Render filled star if rating is greater than index
@@ -67,9 +68,23 @@ const CreateFeedbackForm = ({ onCreate }) => {
       </div>
       <div style={{ marginBottom: '20px' }}>
         <label style={{ display: 'block', marginBottom: '5px' }}>Comment:</label>
-        <textarea name="comment" value={formData.comment} onChange={handleChange} style={{ width: '100%', padding: '8px', borderRadius: '3px', border: '1px solid #ccc', resize: 'vertical' }} required />
+        <textarea name="comment" value={formData.comment} onChange={handleChange} placeholder="If you're not satisfied, how can we improve our services?" style={{ width: '100%', padding: '8px', borderRadius: '3px', border: '1px solid #ccc', resize: 'vertical' }} required />
       </div>
-      
+      <div style={{ marginBottom: '20px' }}>
+        <label style={{ display: 'block', marginBottom: '5px' }}>Service:</label>
+        <select name="service" value={formData.service} onChange={handleChange} style={{ width: '100%', padding: '8px', borderRadius: '3px', border: '1px solid #ccc' }} required>
+          <option value="">Select a service</option>
+          <option value="Small Dog Full Groom">Small Dog Full Groom</option>
+          <option value="Medium Dog Full Groom">Medium Dog Full Groom</option>
+          <option value="Large Dog Full Groom">Large Dog Full Groom</option>
+          <option value="Small Dog Bath & Tidy">Small Dog Bath & Tidy</option>
+          <option value="Medium Dog Bath & Tidy">Medium Dog Bath & Tidy</option>
+          <option value="Large Dog Bath & Tidy">Large Dog Bath & Tidy</option>
+          <option value="Bath & Dry Small Dog">Bath & Dry Small Dog</option>
+          <option value="Bath & Dry Medium Dog">Bath & Dry Medium Dog</option>
+          <option value="Bath & Dry Large Dog">Bath & Dry Large Dog</option>
+        </select>
+      </div>
       <button type="submit" style={{ backgroundColor: '#007bff', color: '#fff', padding: '10px 20px', borderRadius: '3px', border: 'none', cursor: 'pointer', fontSize: '16px' }}>Submit Feedback</button>
     </form>
   );
