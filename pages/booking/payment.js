@@ -39,6 +39,8 @@ const Payment = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        handleCashOut();
+
         try {
             if (customerNoLogin && customerNoLogin.email !== '') {
                 const response = await api.post('/appointment-no-loggin', {
@@ -88,7 +90,6 @@ const Payment = () => {
             if (result.error) {
                 console.error(result.error.message);
             }
-            router.back();
         } catch (error) {
             console.error('Error creating payment:', error);
         }
@@ -123,9 +124,6 @@ const Payment = () => {
                                 <h5>${(selectedService.price * 1.13).toFixed(2)}</h5>
                             </div>
 
-                            <Button variant="primary" onClick={handleCashOut}>
-                                Pay with card
-                            </Button>
                         </Card.Body>
                     </Card>
                 </Col>
