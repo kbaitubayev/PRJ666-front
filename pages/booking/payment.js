@@ -88,6 +88,7 @@ const Payment = () => {
             if (result.error) {
                 console.error(result.error.message);
             }
+            router.back();
         } catch (error) {
             console.error('Error creating payment:', error);
         }
@@ -123,7 +124,7 @@ const Payment = () => {
                             </div>
 
                             <Button variant="primary" onClick={handleCashOut}>
-                                Cash Out
+                                Pay with card
                             </Button>
                         </Card.Body>
                     </Card>

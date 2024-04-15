@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import styles from '../styles/Home.module.css'; // Import the CSS module
 import { useAtom } from 'jotai';
-import { customerAtom } from '../store';
+import { customerAtom, profileAtom } from '../store';
 
 const replaceNewlinesWithBr = (text) => {
   return { __html: text.replace(/\n/g, '<br/>') };
@@ -20,6 +20,7 @@ const Home = () => {
   const [homeData, setHomeData] = useState(null);
   const [user, setUser] = useState('');
   const [customer, setCustomer] = useAtom(customerAtom);
+  const [profile, setProfile] = useAtom(profileAtom);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +50,7 @@ const Home = () => {
         });
         // Update customer state with fetched data
         setCustomer(response.data);
+        setProfile(response.data);
       } catch (error) {
         console.log(error);
       }
